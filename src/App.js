@@ -12,7 +12,10 @@ class App extends Component {
     const text = event.target.value
     this.setState({ text })
   }
-  renderText = text => marked(text, { sanitize: true })
+  renderText = text => {
+    const __html = marked(text, { sanitize: true })
+    return { __html }
+  }
   render () {
   return (
     <div className="container">
@@ -25,8 +28,7 @@ class App extends Component {
             rows='35'/>
         </div>
         <div className='col-sm-6'>
-          <div dangerouslySetInnerHTML={{ __html: this.renderText
-          (this.state.text) }} />
+          <div dangerouslySetInnerHTML={this.renderText(this.state.text) } />
         </div>
       </div>     
     </div>
